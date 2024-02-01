@@ -134,7 +134,7 @@
             <field name="name">Tasks</field>
             <field name="res_model">project.task</field>
             <field name="view_mode">kanban,tree,form,calendar,pivot,graph,activity</field>
-            <field name="domain">[('display_project_id', '=', active_id)]</field>
+            <field name="domain">[('project_id', '=', active_id)]</field>
             <field name="context">{
                 'default_project_id': active_id,
                 'show_project_update': True,
@@ -1161,13 +1161,13 @@
                     </div>
                     <group>
                         <group>
-                            <field name="project_id"
+                            <field name="display_project_id"
                                    placeholder="Private"
                                    domain="[('active', '=', True), ('company_id', '=', company_id)]"
                                    attrs="{'invisible': [('parent_id', '!=', False)]}"
                                    widget="project_private_task"
                             />
-                            <field name="display_project_id" string="Project" attrs="{'invisible': [('parent_id', '=', False)]}" domain="[('active', '=', True), ('company_id', '=', company_id)]"/>
+                            <field name="project_id" string="Project" attrs="{'invisible': [('parent_id', '=', False)]}" domain="[('active', '=', True), ('company_id', '=', company_id)]"/>
                             <field name="milestone_id"
                                 placeholder="e.g. Product Launch"
                                 context="{'default_project_id': project_id if not parent_id or not display_project_id else display_project_id}"
@@ -1656,7 +1656,7 @@
             <field name="res_model">project.task</field>
             <field name="view_mode">kanban,tree,form,calendar,pivot,graph,activity</field>
             <field name="context">{'search_default_my_tasks': 1}</field>
-            <field name="domain">[('display_project_id', '!=', False)]</field>
+            <field name="domain">[('project_id', '!=', False)]</field>
             <field name="search_view_id" ref="view_task_search_form"/>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
@@ -1791,7 +1791,7 @@
             <field name="res_model">project.task</field>
             <field name="view_mode">tree,form,calendar,graph</field>
             <field name="context">{'search_default_user_ids': [active_id], 'default_user_ids': [(6, 0, [active_id])]}</field>
-            <field name="domain">[('display_project_id', '!=', False)]</field>
+            <field name="domain">[('project_id', '!=', False)]</field>
             <field name="binding_model_id" ref="base.model_res_users"/>
             <field name="binding_view_types">form</field>
         </record>
